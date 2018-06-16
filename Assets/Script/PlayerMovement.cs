@@ -15,8 +15,8 @@ public class PlayerMovement : MonoBehaviour {
     // called in a fixed time intervals, physics stuff should be done here
     void FixedUpdate()
     {
-        moveToPosition();
         nextPosition = handleKeyboardInput(nextPosition);
+        moveToPosition();
         setDirectionForPlayerAnimation();
     }
     private void moveToPosition() {
