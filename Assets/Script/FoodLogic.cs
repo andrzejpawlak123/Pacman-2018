@@ -9,5 +9,9 @@ public class FoodLogic : MonoBehaviour {
         if ("player".Equals(co.name)) {
             Destroy(gameObject);
         }
+        if ("map".Equals(co.name))
+        {
+            Destroy(gameObject);
+        }
     }
 }
