@@ -15,9 +15,17 @@ public class PlayerMovement : MonoBehaviour {
     // called in a fixed time intervals, physics stuff should be done here
     void FixedUpdate()
     {
-        nextPosition = handleKeyboardInput(nextPosition);
+        //nextPosition = handleJoypadInput(VirtualJoystick.joypadPos);
+
         moveToPosition();
+
+        nextPosition = (Vector2)transform.position + VirtualJoystick.joypadPos;
+        nextPosition = handleKeyboardInput(nextPosition);
+
+
         setDirectionForPlayerAnimation();
+
+        Debug.Log("JoypadPosition : " + VirtualJoystick.joypadPos);
     }
     private void moveToPosition() {
         Vector2 p = Vector2.MoveTowards(transform.position, nextPosition, velocity);
