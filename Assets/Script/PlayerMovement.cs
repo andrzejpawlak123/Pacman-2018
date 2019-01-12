@@ -15,9 +15,17 @@ public class PlayerMovement : MonoBehaviour {
     // called in a fixed time intervals, physics stuff should be done here
     void FixedUpdate()
     {
+        //nextPosition = handleJoypadInput(VirtualJoystick.joypadPos);
+
         moveToPosition();
+
+        nextPosition = (Vector2)transform.position + VirtualJoystick.joypadPos; 
         nextPosition = handleKeyboardInput(nextPosition);
+
+    
         setDirectionForPlayerAnimation();
+
+        Debug.Log("JoypadPosition : "+ VirtualJoystick.joypadPos);
     }
     private void moveToPosition() {
         Vector2 p = Vector2.MoveTowards(transform.position, nextPosition, velocity);
@@ -38,6 +46,20 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetKey(KeyCode.DownArrow) && canMove(-Vector2.up))
             nextPosition = (Vector2)transform.position - Vector2.up;
         if (Input.GetKey(KeyCode.LeftArrow) && canMove(-Vector2.right))
+            nextPosition = (Vector2)transform.position - Vector2.right;
+
+        return nextPosition;
+    }
+
+    private Vector2 handleJoypadInput(Vector2 nextPosition)
+    {
+        if (nextPosition.y > 2 && nextPosition.y > nextPosition.x && canMove(Vector2.up))
+            nextPosition = (Vector2)transform.position + Vector2.up;
+        if (nextPosition.x > 2 && nextPosition.x > nextPosition.y && canMove(Vector2.right))
+            nextPosition = (Vector2)transform.position + Vector2.right;
+        if (nextPosition.y < -2 && nextPosition.y < nextPosition.x && canMove(-Vector2.up))
+            nextPosition = (Vector2)transform.position - Vector2.up;
+        if (nextPosition.x < -2 && nextPosition.x < nextPosition.y && canMove(-Vector2.right))
             nextPosition = (Vector2)transform.position - Vector2.right;
 
         return nextPosition;
