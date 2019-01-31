@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/walls.unity
     guid: 8545ea3068c49c94ba1435bd173b278b
+  - enabled: 1
+    path: Assets/menu.unity
+    guid: 1c9b304152aae25449f998df8ba7c97b
   m_configObjects: {}
