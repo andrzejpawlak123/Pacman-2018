@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour {
         setDirectionForPlayerAnimation();
 
         Debug.Log("JoypadPosition : " + VirtualJoystick.joypadPos);
+
     }
     private void moveToPosition() {
         Vector2 p = Vector2.MoveTowards(transform.position, nextPosition, velocity);

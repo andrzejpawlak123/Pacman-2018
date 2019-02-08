@@ -1,13 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GhostMovement : MonoBehaviour {
 
+    
     //   public Transform[] waypoints;
     private Vector2 nextPosition = Vector2.zero;
+    
 
-    int cur = 0;
+   int cur = 0;
 
    // public float velocity = Random.Range(1, 2);
     private float velocity = 0.1F;
@@ -24,6 +27,7 @@ public class GhostMovement : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+       
 		
 	}
 
@@ -56,6 +60,7 @@ public class GhostMovement : MonoBehaviour {
         {
             case "player":
                 Destroy(co.gameObject);
+                SceneManager.LoadScene("DecisionMaking"); 
                 break;
             case "map":
                 afterFirstColision = true;
@@ -126,4 +131,16 @@ public class GhostMovement : MonoBehaviour {
 
         return (raycastHit.collider == GetComponent<Collider2D>());
     }
+
+    public void gameOver()
+    {
+        Application.Quit();
+    }
+
+    public void restart()
+    {
+        SceneManager.LoadScene("walls");
+    }
+
 }
+
