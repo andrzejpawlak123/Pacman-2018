@@ -11,7 +11,7 @@ public class GhostMovement : MonoBehaviour {
     
 
    int cur = 0;
-
+    int helpVariable = 0;
    // public float velocity = Random.Range(1, 2);
     private float velocity = 0.1F;
 
@@ -27,18 +27,28 @@ public class GhostMovement : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        afterFirstColision = true;
        
-		
-	}
+    }
 
     // called in a fixed time intervals, physics stuff should be done here
     void FixedUpdate()
-    {
+    {   
+       
         moveToPosition(nextPosition);
 
-        if (afterFirstColision)
+        if (afterFirstColision) //afterFirstColision
         {
             nextPosition = GenerateRandomMove(nextPosition);
+            if (helpVariable < 50)
+            {
+                afterFirstColision = false;
+                helpVariable++;
+            }
+            else
+            {
+                afterFirstColision = true;
+            }
         }
         else {
             if (!canMove(Vector2.up))
@@ -50,7 +60,6 @@ public class GhostMovement : MonoBehaviour {
                 lastDirection = Vector2.up;
             }
         }
-
         setDirectionForPlayerAnimation();
     }
 
@@ -65,6 +74,7 @@ public class GhostMovement : MonoBehaviour {
             case "map":
                 afterFirstColision = true;
                 break;
+          
         }
     }
 
@@ -130,16 +140,6 @@ public class GhostMovement : MonoBehaviour {
         RaycastHit2D raycastHit = Physics2D.Linecast(position + direction, position);
 
         return (raycastHit.collider == GetComponent<Collider2D>());
-    }
-
-    public void gameOver()
-    {
-        Application.Quit();
-    }
-
-    public void restart()
-    {
-        SceneManager.LoadScene("walls");
     }
 
 }
