@@ -5,7 +5,7 @@ using UnityEngine.Purchasing;
 
 
     public class IAPMenager : MonoBehaviour, IStoreListener
-    {
+{
     public static IAPMenager Instance{ set; get; }
 
         private static IStoreController m_StoreController;          // The Unity Purchasing system.
@@ -14,6 +14,7 @@ using UnityEngine.Purchasing;
         public static string buy_food = "Product_food";
         public static string buy_life = "Product_life";
         public static string Product_NO_ADS = "noAds";
+        public static int hp;
 
     private void Awake()
     {
@@ -40,14 +41,14 @@ using UnityEngine.Purchasing;
             }
             var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
 
-            builder.AddProduct(buy_food, ProductType.Consumable);
-            builder.AddProduct(buy_life, ProductType.Consumable);
+             builder.AddProduct(buy_food, ProductType.Consumable);
+             builder.AddProduct(buy_life, ProductType.Consumable);
              builder.AddProduct(Product_NO_ADS, ProductType.NonConsumable);
             
 
              UnityPurchasing.Initialize(this, builder);
         }
-
+    
 
         private bool IsInitialized()
         {
@@ -67,7 +68,7 @@ using UnityEngine.Purchasing;
          {
              BuyProductID(Product_NO_ADS);
          }
-    void BuyProductID(string productId)
+    void BuyProductID (string productId)
         {
             // If Purchasing has been initialized ...
             if (IsInitialized())
@@ -122,17 +123,22 @@ using UnityEngine.Purchasing;
 
         public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)
         {
-            // A consumable product has been purchased by this user.
+       
             if (String.Equals(args.purchasedProduct.definition.id, buy_food, StringComparison.Ordinal))
             {
             Debug.Log("You bought product FOOD! ");
             }
-            // Or ... a non-consumable product has been purchased by this user.
+            
             else if (String.Equals(args.purchasedProduct.definition.id, buy_life, StringComparison.Ordinal))
             {
+            
             Debug.Log("You bought product LIFE! ");
+            hp = hp + 1;
+            
+            
+            
         }
-            // Or ... a subscription product has been purchased by this user.
+            
             else if (String.Equals(args.purchasedProduct.definition.id, Product_NO_ADS, StringComparison.Ordinal))
             {
             Debug.Log("You bought product NO ADS! ");
