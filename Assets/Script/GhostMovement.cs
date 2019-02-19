@@ -10,7 +10,7 @@ public class GhostMovement : MonoBehaviour {
     private Vector2 nextPosition = Vector2.zero;
     
 
-   int cur = 0;
+    int cur = 0;
     int helpVariable = 0;
    // public float velocity = Random.Range(1, 2);
     private float velocity = 0.1F;
@@ -28,13 +28,11 @@ public class GhostMovement : MonoBehaviour {
     // Use this for initialization
     void Start () {
         afterFirstColision = true;
-       
     }
 
     // called in a fixed time intervals, physics stuff should be done here
     void FixedUpdate()
-    {   
-       
+    {
         moveToPosition(nextPosition);
 
         if (afterFirstColision) //afterFirstColision
@@ -68,8 +66,14 @@ public class GhostMovement : MonoBehaviour {
         switch (co.name)
         {
             case "player":
-                Destroy(co.gameObject);
-                SceneManager.LoadScene("DecisionMaking"); 
+                if (health.points < 0)
+                {
+                    Destroy(co.gameObject);
+                    SceneManager.LoadScene("DecisionMaking");
+                }
+                else {
+                    health.points--;
+                        }
                 break;
             case "map":
                 afterFirstColision = true;
