@@ -66,13 +66,13 @@ public class GhostMovement : MonoBehaviour {
         switch (co.name)
         {
             case "player":
-                if (health.points < 0)
+                if (IAPMenager.hp <=1)
                 {
                     Destroy(co.gameObject);
                     SceneManager.LoadScene("DecisionMaking");
                 }
                 else {
-                    health.points--;
+                    IAPMenager.hp--;
                         }
                 break;
             case "map":

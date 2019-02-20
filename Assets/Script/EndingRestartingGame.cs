@@ -24,4 +24,10 @@ public class EndingRestartingGame : MonoBehaviour {
     {
         SceneManager.LoadScene("walls");
     }
+
+    public void showShop()
+    {
+        SceneManager.LoadScene("menu");
+
+    }
 }

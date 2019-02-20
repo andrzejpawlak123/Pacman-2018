@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/DecisionMaking.unity
     guid: c1f71509c73c57c40bf0a0043276f536
+  - enabled: 1
+    path: Assets/menu.unity
+    guid: f93bafe6e7f0dbf4cb12b4c8d7d2a1bc
+  - enabled: 1
+    path: Assets/WinGAme.unity
+    guid: 5cdfc5c2b34f30648b0d4e7c7e604175
   m_configObjects: {}
